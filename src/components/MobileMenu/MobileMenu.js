@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import styled from 'styled-components/macro';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import React from "react";
+import styled, { keyframes } from "styled-components/macro";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
 
-import { QUERIES, WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from "../../constants";
 
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
-import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
+import VisuallyHidden from "../VisuallyHidden";
+import NavLink from "../NavLink/NavLink";
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
@@ -36,15 +37,34 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   );
 };
 
+const backdropFadeIn = keyframes`
+  to { background: var(--color-backdrop); }
+`;
+
+const slideIn = keyframes`
+  0% {
+    transform: translateX(100%);
+    opacity: 0%;
+  }
+  25% {
+    transform: translateX(0%);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 100%;
+  }
+`;
+
 const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+  animation: 200ms ${backdropFadeIn} both;
 `;
 
 const Content = styled(DialogContent)`
@@ -54,6 +74,7 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  animation: 1000ms ${slideIn} both;
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -67,18 +88,6 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const NavLink = styled.a`
-  color: var(--color-gray-900);
-  font-weight: ${WEIGHTS.medium};
-  text-decoration: none;
-  font-size: 1.125rem;
-  text-transform: uppercase;
-
-  &:first-of-type {
-    color: var(--color-secondary);
-  }
 `;
 
 const Filler = styled.div`

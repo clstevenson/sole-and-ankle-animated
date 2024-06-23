@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import styled from "styled-components/macro";
 
 import { QUERIES, WEIGHTS } from "../../constants";
@@ -83,8 +83,14 @@ const NavText = styled.div`
   transition: transform 500ms;
 
   ${NavWrapper}:hover & {
-    transform: translateY(-100%);
-    transition: transform 200ms;
+    font-weight: ${WEIGHTS.bold};
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${NavWrapper}:hover & {
+      transform: translateY(-100%);
+      transition: transform 200ms;
+    }
   }
 `;
 
@@ -101,9 +107,11 @@ const HoverNavText = styled.div`
   transform: translateY(100%);
   transition: transform 500ms;
 
-  ${NavWrapper}:hover & {
-    transform: translateY(0%);
-    transition: transform 200ms;
+  @media (prefers-reduced-motion: no-preference) {
+    ${NavWrapper}:hover & {
+      transform: translateY(0%);
+      transition: transform 200ms;
+    }
   }
 `;
 

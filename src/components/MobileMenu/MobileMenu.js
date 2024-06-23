@@ -14,46 +14,44 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
       <Content aria-label="Menu">
-        <CloseButton onClick={onDismiss}>
-          <Icon id="close" />
-          <VisuallyHidden>Dismiss menu</VisuallyHidden>
-        </CloseButton>
-        <Filler />
-        <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Footer>
-          <SubLink href="/terms">Terms and Conditions</SubLink>
-          <SubLink href="/privacy">Privacy Policy</SubLink>
-          <SubLink href="/contact">Contact Us</SubLink>
-        </Footer>
+        <ContentWrapper>
+          <CloseButton onClick={onDismiss}>
+            <Icon id="close" />
+            <VisuallyHidden>Dismiss menu</VisuallyHidden>
+          </CloseButton>
+          <Filler />
+          <Nav>
+            <NavLink href="/sale">Sale</NavLink>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <NavLink href="/men">Men</NavLink>
+            <NavLink href="/women">Women</NavLink>
+            <NavLink href="/kids">Kids</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+          </Nav>
+          <Footer>
+            <SubLink href="/terms">Terms and Conditions</SubLink>
+            <SubLink href="/privacy">Privacy Policy</SubLink>
+            <SubLink href="/contact">Contact Us</SubLink>
+          </Footer>
+        </ContentWrapper>
       </Content>
     </Overlay>
   );
 };
 
 const backdropFadeIn = keyframes`
+  from { background: transparent; }
   to { background: var(--color-backdrop); }
 `;
 
+const fadeIn = keyframes`
+  from { opacity: 0%; }
+  to { opacity: 100%; }
+`;
+
 const slideIn = keyframes`
-  0% {
-    transform: translateX(100%);
-    opacity: 0%;
-  }
-  25% {
-    transform: translateX(0%);
-    opacity: 0%;
-  }
-  100% {
-    transform: translateX(0%);
-    opacity: 100%;
-  }
+  from { transform: translateX(100%); }
+  to { transform: translateX(0%); }
 `;
 
 const Overlay = styled(DialogOverlay)`
@@ -72,9 +70,15 @@ const Content = styled(DialogContent)`
   width: 300px;
   height: 100%;
   padding: 24px 32px;
+  animation: 400ms ${slideIn} both cubic-bezier(0, 0.6, 0.32, 1);
+`;
+
+const ContentWrapper = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  animation: 1000ms ${slideIn} both;
+  animation: 400ms ${fadeIn} both;
+  animation-delay: 200ms;
 `;
 
 const CloseButton = styled(UnstyledButton)`

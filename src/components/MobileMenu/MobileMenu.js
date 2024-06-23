@@ -70,7 +70,9 @@ const Content = styled(DialogContent)`
   width: 300px;
   height: 100%;
   padding: 24px 32px;
-  animation: 400ms ${slideIn} both cubic-bezier(0, 0.6, 0.32, 1);
+  @media (prefers-reduced-motion: no-preference) {
+    animation: 400ms ${slideIn} both cubic-bezier(0, 0.6, 0.32, 1);
+  }
 `;
 
 const ContentWrapper = styled.div`
